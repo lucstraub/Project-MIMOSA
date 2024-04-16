@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from mimosa import MIMOSA, load_params
 
 params = load_params()
