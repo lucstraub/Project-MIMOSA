@@ -69,7 +69,7 @@ def get_constraints(m: AbstractModel) -> Sequence[GeneralConstraint]:
         [
             GlobalConstraint(
                 #added exponent to learning rate based on calibration exercise
-                lambda m, t: m.LOT_factor[t] == 1 / (1 + m.LOT_rate) ** t + m.LOT_min,
+                lambda m, t: m.LOT_factor[t] == min (1 / (1 + m.LOT_rate) ** t + m.LOT_min, 1),
                 # lambda m, t: m.LOT_factor[t] == 1 / (1 + m.LOT_rate) ** t,
                 "LOT"
             ),
