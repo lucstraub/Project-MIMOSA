@@ -62,12 +62,16 @@ def get_constraints(m: AbstractModel) -> Sequence[GeneralConstraint]:
 
     # Learning over time and total learning factor
     m.LOT_rate = Param()
+    m.LOT_min = Param() #minimum reduction level from LOT
     m.LOT_factor = Var(m.t)
     m.learning_factor = Var(m.t)
     constraints.extend(
         [
             GlobalConstraint(
-                lambda m, t: m.LOT_factor[t] == 1 / (1 + m.LOT_rate) ** t, "LOT"
+                #added exponent to learning rate based on calibration exercise
+                lambda m, t: m.LOT_factor[t] == 1 / (1 + m.LOT_rate) ** t + m.LOT_min,
+                # lambda m, t: m.LOT_factor[t] == 1 / (1 + m.LOT_rate) ** t,
+                "LOT"
             ),
             GlobalConstraint(
                 lambda m, t: m.learning_factor[t]
