@@ -87,7 +87,7 @@ economics:
       type: float
       min: 0.01
       max: 10
-      default: 4
+      default: 5
       # default: 3
 
     rho:
